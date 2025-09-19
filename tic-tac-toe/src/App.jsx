@@ -1,56 +1,13 @@
 import { useState } from 'react'
-import './App.css'
+import Game from './components/Game/Game.jsx'
+/* import Board from './components/Board/Board.jsx' */
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-      <div id="game">
-        <h1>Tic Tac Toe</h1>
-          <div id="board">
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-              <button className="cell">
-                  <span className="cell-content"></span>
-              </button>
-          </div>
-  </div>
-
-  <div id="modal-overlay">
-      <div id="game-result-modal">
-          <div id="result-container">
-              <div id="winner-container">
-                  <span></span>
-              </div>
-          </div>
-          <div id="new-game-container">
-              <button id="new-game-button">Start New Game</button>
-          </div>
-      </div>
-  </div>
+      <Game />
+   {/*    <Board /> */}
     </>
   )
 }
