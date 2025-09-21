@@ -3,13 +3,17 @@ import './Game.css'
 import Board from '../Board/Board.jsx'
 
 export default function Game() {
-   const cellValues = ['', '', '', '', '', '', '', '', ''];
+   const [cellValues, setCellValues] = useState(['', '', '', '', '', '', '', '', '']);
 
    const winningCell = [];
 
    const onCellClicked = (cellIndex) => {
-    console.log(`Cell ${cellIndex} clicked`);
-  } 
+    const newCellValues = [...cellValues];
+
+
+    newCellValues[cellIndex] = 'X';
+    setCellValues(newCellValues);
+  };
 
   return (
     <>
