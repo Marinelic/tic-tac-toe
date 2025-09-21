@@ -12,7 +12,7 @@ export default function Board(props) {
               key={index} 
               value={value} 
               canHighLight={canHighLight}
-              onClick={() => props.cellClicked(index)} />;
+              onClick={() => props.onClick(index)} />;
  });
 
   return (

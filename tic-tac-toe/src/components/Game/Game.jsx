@@ -1,18 +1,27 @@
 import { useState } from 'react'
 import './Game.css'
 import Board from '../Board/Board.jsx'
+import Result from '../Result/Result.jsx'
 
 export default function Game() {
    const [cellValues, setCellValues] = useState(['', '', '', '', '', '', '', '', '']);
 
+   const [xIsNext, setXIsNext] = useState(true);
+
    const winningCell = [];
 
+   const IsCellEmpty = (cellIndex) => cellValues[cellIndex] === '';
+   
+
    const onCellClicked = (cellIndex) => {
-    const newCellValues = [...cellValues];
 
+      if (IsCellEmpty(cellIndex)) {
+        const newCellValues = [...cellValues];
 
-    newCellValues[cellIndex] = 'X';
-    setCellValues(newCellValues);
+      newCellValues[cellIndex] = xIsNext ? 'X' : 'O';
+      setCellValues(newCellValues);
+      setXIsNext(!xIsNext);
+    }
   };
 
   return (
@@ -23,21 +32,10 @@ export default function Game() {
             cellValues={cellValues}
             winningCell={winningCell}
             onClick={onCellClicked}/>
-  </div>
-
-  <div id="modal-overlay">
-      <div id="game-result-modal">
-          <div id="result-container">
-              <div id="winner-container">
-                  <span></span>
-              </div>
-          </div>
-          <div id="new-game-container">
-              <button id="new-game-button">Start New Game</button>
-          </div>
       </div>
-  </div>
-    </>
+
+      <Result />
+  </>
   )
 }
 
