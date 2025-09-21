@@ -8,6 +8,8 @@ export default function Game() {
 
    const [xIsNext, setXIsNext] = useState(true);
 
+   const [isGameOver, setIsGameOver] = useState(false);
+
    const winningCell = [];
 
    const IsCellEmpty = (cellIndex) => cellValues[cellIndex] === '';
@@ -21,6 +23,7 @@ export default function Game() {
       newCellValues[cellIndex] = xIsNext ? 'X' : 'O';
       setCellValues(newCellValues);
       setXIsNext(!xIsNext);
+      setIsGameOver(true);
     }
   };
 
@@ -34,7 +37,8 @@ export default function Game() {
             onClick={onCellClicked}/>
       </div>
 
-      <Result />
+      <Result 
+        IsGameOver={isGameOver}/>
   </>
   )
 }
