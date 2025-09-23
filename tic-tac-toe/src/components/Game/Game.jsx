@@ -6,11 +6,9 @@ import { calculateWinner } from '../../Utils/WinnerCalc.jsx'
 
 export default function Game() {
    const [cellValues, setCellValues] = useState(['', '', '', '', '', '', '', '', '']);
-
    const [xIsNext, setXIsNext] = useState(true);
-
    const [isGameOver, setIsGameOver] = useState(false);
-
+   const [numberOfTurnsLeft, setNumberOfTurnsLeft] = useState(9);
    const winningCell = [];
 
    const IsCellEmpty = (cellIndex) => cellValues[cellIndex] === '';
@@ -23,14 +21,17 @@ export default function Game() {
 
       newCellValues[cellIndex] = xIsNext ? 'X' : 'O';
 
+      const newNumverOfTurnsLeft = numberOfTurnsLeft - 1;
+
 
       // Calculate the result
-        const calcResult = calculateWinner(newCellValues, cellIndex);
+        const calcResult = calculateWinner(newCellValues, newNumverOfTurnsLeft, cellIndex);
 
 
       setCellValues(newCellValues);
       setXIsNext(!xIsNext);
       setIsGameOver(calcResult.hasResult);
+      setNumberOfTurnsLeft(newNumverOfTurnsLeft);
     }
   };
 
