@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Game.css'
 import Board from '../Board/Board.jsx'
 import Result from '../Result/Result.jsx'
+import { calculateWinner } from '../../Utils/WinnerCalc.jsx'
 
 export default function Game() {
    const [cellValues, setCellValues] = useState(['', '', '', '', '', '', '', '', '']);
@@ -21,9 +22,15 @@ export default function Game() {
         const newCellValues = [...cellValues];
 
       newCellValues[cellIndex] = xIsNext ? 'X' : 'O';
+
+
+      // Calculate the result
+        const calcResult = calculateWinner(newCellValues, cellIndex);
+
+
       setCellValues(newCellValues);
       setXIsNext(!xIsNext);
-      setIsGameOver(true);
+      setIsGameOver(calcResult.hasResult);
     }
   };
 
