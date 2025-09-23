@@ -9,10 +9,19 @@ export default function Game() {
    const [xIsNext, setXIsNext] = useState(true);
    const [isGameOver, setIsGameOver] = useState(false);
    const [numberOfTurnsLeft, setNumberOfTurnsLeft] = useState(9);
-   const winningCell = [];
+   const [winner, setWinner] = useState();
+   const [winningComb, setWinningComb] = useState([]);
 
    const IsCellEmpty = (cellIndex) => cellValues[cellIndex] === '';
-   
+
+   const restartGame = () => {
+       setCellValues(['', '', '', '', '', '', '', '', '']);
+       setXIsNext(true);
+       setIsGameOver(false);
+       setNumberOfTurnsLeft(9);
+       setWinner(undefined);
+       setWinningComb([]);
+   };   
 
    const onCellClicked = (cellIndex) => {
 
@@ -27,11 +36,12 @@ export default function Game() {
       // Calculate the result
         const calcResult = calculateWinner(newCellValues, newNumverOfTurnsLeft, cellIndex);
 
-
-      setCellValues(newCellValues);
-      setXIsNext(!xIsNext);
-      setIsGameOver(calcResult.hasResult);
-      setNumberOfTurnsLeft(newNumverOfTurnsLeft);
+          setCellValues(newCellValues);
+          setXIsNext(!xIsNext);
+          setIsGameOver(calcResult.hasResult);
+          setNumberOfTurnsLeft(newNumverOfTurnsLeft);
+          setWinner(calcResult.winner);
+          setWinningComb(calcResult.winningComb);
     }
   };
 
@@ -41,12 +51,14 @@ export default function Game() {
         <h1>Tic Tac Toe</h1>
           <Board 
             cellValues={cellValues}
-            winningCell={winningCell}
+            winningCell={winningComb}
             onClick={onCellClicked}/>
       </div>
 
       <Result 
-        IsGameOver={isGameOver}/>
+        IsGameOver={isGameOver}
+        winner={winner}
+        onNewGameClicked={restartGame}/>
   </>
   )
 }

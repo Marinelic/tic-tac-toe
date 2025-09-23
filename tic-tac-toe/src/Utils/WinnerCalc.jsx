@@ -24,7 +24,7 @@ export const calculateWinner = (cellValues, numberOfTurnsLeft, cellIndex) => {
             return {
                 hasResult : true,
                 winner : currentValue,
-                winningComb : [cellIndex, winningMatrix[i][0], winningRanges[i][1]]
+                winningComb : [cellIndex, winningRanges[i][0], winningRanges[i][1]]
             }
         }
     }
